@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-21.681184668989545" y="1113.2665505226482">com</node>
+    <node x="239.31881533101046" y="963.2665505226482">netscape</node>
+    <node x="649.3188153310105" y="963.2665505226482">oracle</node>
+    <node x="143.31881533101046" y="1113.2665505226482">org</node>
+    <node x="-21.681184668989545" y="1038.2665505226482">kotlin</node>
+    <node x="257.0" y="181.0">Baraja</node>
+    <node x="308.31881533101046" y="1113.2665505226482">sun</node>
+    <node x="0.0" y="376.0">Jugador</node>
+    <node x="444.31881533101046" y="963.2665505226482">META-INF</node>
+    <node x="473.31881533101046" y="1113.2665505226482">jdk</node>
+    <node x="36.0" y="181.0">Mano</node>
+    <node x="-21.681184668989545" y="963.2665505226482">groovyjarjarasm</node>
+    <node x="726.3188153310105" y="1038.2665505226482">java</node>
+    <node x="167.31881533101046" y="1038.2665505226482">groovy</node>
+    <node x="545.3188153310105" y="1038.2665505226482">javax</node>
+    <node x="242.41463414634143" y="1032.7090592334498">groovyjarjarpicocli</node>
+    <node x="356.31881533101046" y="1038.2665505226482">javafx</node>
+    <node x="159.04166666666669" y="0.0">Carta</node>
+    <node x="10.0" y="548.0">Coupier</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Coupier" target="Jugador">
+      <point x="-75.0" y="-38.5" />
+      <point x="47.5" y="523.0" />
+      <point x="42.5" y="523.0" />
+      <point x="-42.5" y="61.0" />
+    </edge>
+    <edge source="Mano" target="Carta">
+      <point x="-50.25" y="-72.5" />
+      <point x="86.25" y="151.0" />
+      <point x="198.04166666666669" y="151.0" />
+      <point x="-39.0" y="60.5" />
+    </edge>
+    <edge source="Jugador" target="Carta">
+      <point x="-56.66666666666666" y="-61.0" />
+      <point x="28.333333333333343" y="351.0" />
+      <point x="25.5" y="351.0" />
+      <point x="25.5" y="141.0" />
+      <point x="172.04166666666669" y="141.0" />
+      <point x="-65.0" y="60.5" />
+    </edge>
+    <edge source="groovyjarjarpicocli" target="groovyjarjarpicocli">
+      <point x="62.0" y="15.0" />
+      <point x="428.4146341463414" y="1092.7090592334498" />
+      <point x="212.41463414634143" y="1092.7090592334498" />
+      <point x="212.41463414634143" y="1040.2090592334498" />
+      <point x="-124.0" y="-7.5" />
+    </edge>
+    <edge source="Jugador" target="Mano">
+      <point x="0.0" y="-61.0" />
+      <point x="85.0" y="351.0" />
+      <point x="69.5" y="351.0" />
+      <point x="-67.0" y="72.5" />
+    </edge>
+    <edge source="Baraja" target="Carta">
+      <point x="-60.66666666666663" y="-72.5" />
+      <point x="287.33333333333337" y="161.0" />
+      <point x="250.04166666666669" y="161.0" />
+      <point x="13.0" y="60.5" />
+    </edge>
+    <edge source="Coupier" target="Mano">
+      <point x="75.0" y="-38.5" />
+      <point x="197.5" y="523.0" />
+      <point x="180.5" y="523.0" />
+      <point x="180.5" y="351.0" />
+      <point x="203.5" y="351.0" />
+      <point x="67.0" y="72.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7763358778625954" x="263.40489295221647" y="336.6853490658801" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
