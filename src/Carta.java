@@ -1,22 +1,14 @@
 public class Carta {
-    private String numero;
-    private String figura;
+    private NumerosCartas valor;
 
-    public Carta(String numero, String figura) {
-        this.numero = numero;
-        this.figura = figura;
-    }
 
-    public String getFigura(){
-        return figura;
+    public Carta( NumerosCartas val) {
+        this.valor = val;
+
     }
 
     public String getNumero() {
-        return numero;
-    }
-
-    public String getCarta(){
-        return numero+" de "+figura;
+        return valor.toString();
     }
 
 }
