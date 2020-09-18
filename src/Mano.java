@@ -20,16 +20,11 @@ public class Mano {
         this.apuesta = apuesta;
     }
 
-    public ArrayList<Carta> getCartas() {
-        return mano;
-    }
 
     public void setCartas(Carta c) {
         mano.add(c);
     }
-    public int contar(){
-        return 0;
-    }
+
 
 
 }

@@ -8,18 +8,20 @@ public class Baraja {
     }
     //toma una carta aleatoria de la baraja y la borra
     public Carta getCarta(){
-        return new Carta( NumerosCartas.ACEESPADAS);
+        return new Carta( NumerosCartas.ACEESPADAS,0);
     }
+    //baraja las cartas
     public void barajarse(){
 
     }
-    public void partirse(){
 
-    }
     //generar la baraja con 52 cartas
     public void generarCartas(){
-
         ArrayList<Carta> c = new ArrayList<>();
-        this.baraja = c;
+        Carta c1 = new Carta(NumerosCartas.ACECORAZONES, 1);
+        Carta c2 = new Carta(NumerosCartas.ACEESPADAS, 1);
+
+        this.baraja.add(c1);
+        this.baraja.add(c2);
     }
 }

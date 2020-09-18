@@ -1,5 +1,5 @@
 public enum NumerosCartas {
-    ACEESPADAS("Ace(Espadas)"),ACECORAZONES("Ace(CORAZONES)");
+    ACEESPADAS("Ace(Espadas)"),ACECORAZONES("Ace(CORAZONES)"),DOSCORAZON("Dos(Corazones)");
 
     private final String text;
 

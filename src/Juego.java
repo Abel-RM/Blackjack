@@ -13,7 +13,7 @@ public class Juego {
         String j ="";
         Baraja baraja = new Baraja();
         baraja.generarCartas();
-
+        baraja.barajarse();
         ArrayList<Carta> arregloCartas = new ArrayList<>();
         Carta c1;
         Carta c2;
@@ -35,32 +35,45 @@ public class Juego {
         arregloCartas.add(c2);
         Coupier coupier = new Coupier("Coupier",new Mano(arregloCartas));
 
-        int cont=0;
+        coupier.manoFinalCoupier(baraja);
+
+
         int sumaPuntos = 0;
         String valorMano ="";
         char opcion = ' ';
-        do{
-            System.out.println("Jugador : "+jugadores[cont].getNombre());
-            valorMano = coupier.decirMano(jugadores[cont].getMano());
-            System.out.println("La mano del jugador es:");
-            System.out.println(valorMano);
-            System.out.println("Da una suma total de:");
-            sumaPuntos = coupier.contarPuntos(jugadores[cont].getMano());
-            System.out.println(sumaPuntos);
-            System.out.println("C:tomar ota carta, P: plantarse");
+        boolean plantarse;
+        for(int i = 0; i<numJugadores;i++){
+            plantarse = true;
             do{
-                opcion = Keyboard.readChar();
-            }while (opcion == 'C' ||opcion == 'P');
-            if(opcion =='C'){
 
-            }else{
+                System.out.println("Jugador : "+jugadores[i].getNombre());
+                valorMano = coupier.decirMano(jugadores[i].getMano());
+                System.out.println("La mano del jugador es:");
+                System.out.println(valorMano);
+                if(coupier.determinarBlackjack(jugadores[i].getMano())){
+                    plantarse = false;
+                }else{
+                    System.out.println("Da una suma total de:");
+                    sumaPuntos = coupier.contarPuntos(jugadores[i].getMano());
+                    System.out.println(sumaPuntos);
+                    System.out.println("C:tomar ota carta, P: plantarse");
 
-            }
+                    do{
+                        opcion = Keyboard.readChar();
+                    }while (opcion == 'C' ||opcion == 'P');
+                    if(opcion =='C'){
+                        jugadores[i].getMano().setCartas(baraja.getCarta());
+                    }else{
+                        plantarse = false;
+                    }
+                }
 
-            if( cont == numJugadores-1)
-                cont=0;
-            else cont++;
-        }while (true);
+
+            }while (plantarse);
+            //determinar el juego del jugador en turno
+            System.out.println(coupier.determinarGanador(jugadores[i].getMano()));
+        }
+
 
     }
 
