@@ -1,9 +1,12 @@
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class Juego {
     public static void main(String[] args) {
-        
+
         int numJugadores = 0;
         Jugador jugadores[] = new Jugador[numJugadores];
         do{
@@ -13,7 +16,7 @@ public class Juego {
         String j ="";
         Baraja baraja = new Baraja();
         baraja.generarCartas();
-        baraja.barajarse();
+        baraja.barajarse(0);
         ArrayList<Carta> arregloCartas = new ArrayList<>();
         Carta c1;
         Carta c2;
@@ -74,9 +77,24 @@ public class Juego {
             System.out.println(coupier.determinarGanador(jugadores[i].getMano()));
         }
 
+        /*
+
+        Baraja b = new Baraja();
+        b.generarCartas();
+
+        for(Carta c : b.baraja){
+            System.out.println(c.getValorFigura());
+        }
+        b.barajarse(0);
+
+       System.out.println("------------------------------------------------------------------------------------");
+
+        for(Carta c : b.baraja){
+            System.out.println(c.getValorFigura());
+        }
+        System.out.println(b.baraja.size());
+        */
 
     }
-
-
 
 }
