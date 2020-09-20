@@ -2,6 +2,9 @@ public class Carta {
     private NumerosCartas valorFigura;
     private int valorNum;
 
+    public Carta() {
+    }
+
     public Carta(NumerosCartas val, int valor) {
         this.valorFigura = val;
         this.valorNum =  valor;

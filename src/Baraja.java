@@ -7,20 +7,20 @@ public class Baraja {
 
     }
     //toma una carta aleatoria de la baraja y la borra
-    public Carta getCarta(){
+    public void getCarta(Mano m){
         int num = (int) (Math.random() * baraja.size()-1) ;
-        Carta c = baraja.get(num);
+        m.setCartas(baraja.get(num));
         baraja.remove(num);
-        return c;
     }
     //baraja las cartas
     public void barajarse(int cont){
         if(cont < 5){
-            ArrayList<Carta> c = new ArrayList<>();
+            Mano m =  new Mano();
             for(int i = 0; i< 52; i++){
-                c.add(getCarta());
+                getCarta(m);
             }
-            baraja.addAll(c);
+            baraja.clear();
+            baraja.addAll(m.getMano());
         }else
             barajarse(++cont);
     }

@@ -8,6 +8,9 @@ public class Jugador {
         this.nombre = nombre;
         this.mano = mano;
     }
+    public Jugador() {
+
+    }
 
     public Mano getMano() {
         return mano;
@@ -15,6 +18,10 @@ public class Jugador {
 
     public String getNombre() {
         return nombre;
+    }
+    public void setMano(Carta c)
+    {
+        this.mano.setCartas(c);
     }
 
 }
