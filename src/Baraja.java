@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Baraja {
-    public ArrayList<Carta> baraja = new ArrayList<>();
+    private ArrayList<Carta> baraja = new ArrayList<>();
 
     public Baraja() {
 

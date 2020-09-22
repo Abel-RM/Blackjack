@@ -88,8 +88,10 @@ public class Coupier extends Jugador{
     {
         //dejar guardada la mano final del coupier para despues ser comparada en el metodo determinarGanador
         Mano m = getMano();
+        int numAs = convertirValores(m);
         int valor = 0;
         String g="";
+        determinarValorAs(m,numAs);
         //Extrae el valor de las cartas de la mano actual
         valor = contarPuntos(m);
         g = "La mano del coupier es: \n";
@@ -101,6 +103,8 @@ public class Coupier extends Jugador{
             g += "El coupier toma una carta \n";
             b.getCarta(m);
             g += m.getMano().get(m.getMano().size()-1).getValorFigura()+"\n";
+            convertirValores(m);
+            determinarValorAs(m,numAs);
             valor = contarPuntos(m);
             g += "Da una suma total de:\n"+contarPuntos(m)+"\n";
         }
@@ -110,10 +114,40 @@ public class Coupier extends Jugador{
     public boolean determinarBlackjack(Mano m)
     {
 
-        if(contarPuntos(m) == 21)
+        if(contarPuntos(m) == 21 && m.getMano().size() == 2)
             return true;
         else
             return false;
+
+    }
+    public int convertirValores(Mano mano){
+        int cont = 0;
+        for (Carta item : mano.getMano()){
+            if(item.getValorNum()==1 || item.getValorNum() == 11){
+                cont++;
+                item.setValorNum(11);
+            }
+
+        }
+        return  cont;
+    }
+
+    public void determinarValorAs(Mano mano,int cont){
+
+        int puntos = contarPuntos(mano);
+
+        if(puntos>21){
+            cont--;
+            for (Carta item : mano.getMano()){
+                if(item.getValorNum()==11){
+                    item.setValorNum(1);
+                    break;
+                }
+
+            }
+            if(cont > 0)
+                determinarValorAs(mano,cont);
+        }
 
     }
 

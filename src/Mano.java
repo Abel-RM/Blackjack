@@ -18,6 +18,9 @@ public class Mano {
     public Mano( ) {
 
     }
+    public void setCarta(Carta carta){
+        mano.add(carta);
+    }
 
 
     public int getApuesta() {

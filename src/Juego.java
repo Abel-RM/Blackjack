@@ -28,6 +28,7 @@ public class Juego {
         //asigna mano a coupier
         baraja.getCarta(arregloCartas);
         baraja.getCarta(arregloCartas);
+
         Coupier coupier = new Coupier("Coupier",arregloCartas);
         System.out.println("La primera carta del coupier es: "+coupier.getMano().getMano().get(0).getValorFigura());
         System.out.println("La segunda carta es: ?????");
@@ -46,6 +47,7 @@ public class Juego {
                 valorMano = coupier.decirMano(jugadores[i].getMano());
                 System.out.println("La mano del jugador es:");
                 System.out.println(valorMano);
+                coupier.convertirValores(jugadores[i].getMano());
                 if(coupier.determinarBlackjack(jugadores[i].getMano())){
                     plantarse = false;
                 }else{
@@ -57,8 +59,8 @@ public class Juego {
 
                         do{
                             opcion = Keyboard.readChar();
-                        }while (opcion != 'C' && opcion != 'P');
-                        if(opcion =='C'){
+                        }while (opcion != 'C' && opcion !='c'&& opcion != 'P' && opcion != 'p');
+                        if(opcion =='C' || opcion == 'c'){
                             baraja.getCarta(jugadores[i].getMano());
 
                         }else{
