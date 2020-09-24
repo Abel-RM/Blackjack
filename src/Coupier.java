@@ -1,154 +1,99 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Coupier extends Jugador{
+    private Baraja baraja;
 
-
-    public Coupier(String nombre, Mano mano) {
-        super(nombre, mano);
+    public Coupier(String nombre) {
+        super(nombre);
+        baraja = new Baraja();
+        barajarse();
     }
     //determina si gana el copier o el jugador en turno y dice los puntos
     //verificando si el jugador tiene blackjack
-    public String determinarGanador(Mano m,String nombre)
+    public String determinarGanador(Jugador jugador)
     {
         String resp = "";
+        ArrayList<Carta> arrManoJugador = jugador.getMano();
 
-        if (this.determinarBlackjack(m))
+        if (this.determinarBlackjack(arrManoJugador))
         {
-            resp = "El ganador en automatico es "+nombre+ " ya que tiene Blackjack, Felicidades!";
+            resp = "El ganador en automatico es "+jugador.getNombre()+ " ya que tiene Blackjack, Felicidades!";
+        }
+        else if (this.determinarBlackjack(getMano())){
+            resp = "El ganador en automatico es el coupier ya que tiene Blackjack, Felicidades!";
         }
         else
         {
             int valorJugador = 0;
             int valorCoupier = 0;
 
-            ArrayList<Carta> arrManoJugador = m.getMano();
+            valorJugador = contarPuntos(arrManoJugador);
+            valorCoupier = contarPuntos(getMano());
+            if(valorJugador > 21){
+                resp = "El ganador es el Coupier con " + valorCoupier + " Puntos, sobre " + valorJugador + " de "+jugador.getNombre()+" ya que se pasó de los 21";
+            }else
+                if (jugador.getMano().size() == 5 && valorJugador <= 21 ){
+                    resp = "El ganador es "+jugador.getNombre()+" con "+ valorJugador + " Puntos, ya que tiene 5 cartas y no se ha pasado de los 21" ;
+                }else
+                    if (getMano().size() == 5 && valorCoupier <= 21 ){
+                        resp = "El ganador es el Coupier con " + valorCoupier + " Puntos, ya que tiene 5 cartas y no se ha pasado de los 21";
+                    }else
+                        if ((valorJugador >= valorCoupier) || (valorCoupier > 21))
+                        {
+                            resp = "El ganador es "+jugador.getNombre()+" con "+ valorJugador + " Puntos, sobre " + valorCoupier + " del Coupier";
+                        }
+                        else {
+                            resp = "El ganador es el Coupier con " + valorCoupier + " Puntos, sobre " + valorJugador + " de "+jugador.getNombre();
+                        }
 
-            for(int i = 0; i < arrManoJugador.size(); i++)
-            {
-                valorJugador += arrManoJugador.get(i).getValorNum();
-            }
-            Mano mCoupier = getMano();
-            ArrayList<Carta> arrManoCoupier = mCoupier.getMano();
-
-            for(int i = 0; i < arrManoCoupier.size(); i++)
-            {
-                valorCoupier += arrManoCoupier.get(i).getValorNum();
-            }
-
-            if (((valorJugador >= valorCoupier) && valorJugador <= 21 )||(valorCoupier > 21 && valorJugador <= 21))
-            {
-                resp = "El ganador es "+nombre+" con "+ valorJugador + " Puntos, sobre " + valorCoupier + " del Coupier";
-            }
-            else
-                if(valorJugador > 21){
-                    resp = "El ganador es el Coupier con " + valorCoupier + " Puntos, sobre " + valorJugador + " de "+nombre+" ya que se pasó de los 21";
-                }
-                else {
-                    resp = "El ganador es el Coupier con " + valorCoupier + " Puntos, sobre " + valorJugador + " de "+nombre;
-                }
         }
 
         return resp;
     }
 
-    //retorna un string con las cartas que estan en la mano
-    public String decirMano(Mano m)
-    {
-        String resp = "";
 
-        ArrayList<Carta> arrMano = m.getMano();
-
-        resp = "Tiene";
-
-        for(int i = 0; i < arrMano.size(); i++)
-        {
-            Carta c = arrMano.get(i);
-            resp += " " + c.getValorFigura() + ", ";
-        }
-
-        //Elimina el ultimo caracter, siendo una coma.
-        resp = resp.substring(0, resp.length() - 2);
-
-        return resp;
+    public Baraja getBarajaActual() {
+        return baraja;
     }
-    //retorna la suma de los puntos
-    public int contarPuntos(Mano m)
-    {
-        int valor = 0;
 
-        ArrayList<Carta> arrMano = m.getMano();
-        for (Carta c : arrMano){
-            valor += c.getValorNum();
-        }
-
-        return valor;
-    }
     //iterar hasta que el coupier se plante, seguir reglas para el coupier
-    public String manoFinalCoupier(Baraja b)
+    public String manoFinalCoupier()
     {
-        //dejar guardada la mano final del coupier para despues ser comparada en el metodo determinarGanador
-        Mano m = getMano();
-        int numAs = convertirValores(m);
+        ArrayList<Carta> manoActual = getMano();
         int valor = 0;
         String g="";
-        determinarValorAs(m,numAs);
         //Extrae el valor de las cartas de la mano actual
-        valor = contarPuntos(m);
+        valor = contarPuntos(manoActual);
         g = "La mano del coupier es: \n";
-        g += decirMano(m)+"\n";
-        g += "Da una suma total de:\n"+contarPuntos(m)+"\n";
+        g += decirMano()+"\n";
+        g += "Da una suma total de:\n"+contarPuntos(manoActual)+"\n";
 
         //Pide una nueva carta si el valor es menor a 17
         while (valor < 17){
             g += "El coupier toma una carta \n";
-            b.getCarta(m);
-            g += m.getMano().get(m.getMano().size()-1).getValorFigura()+"\n";
-            convertirValores(m);
-            determinarValorAs(m,numAs);
-            valor = contarPuntos(m);
-            g += "Da una suma total de:\n"+contarPuntos(m)+"\n";
+            manoActual.add(baraja.getCarta());
+            g += manoActual.get(manoActual.size()-1).getValorFigura()+"\n";
+            valor = contarPuntos(manoActual);
+            g += "Da una suma total de:\n"+contarPuntos(manoActual)+"\n";
         }
         return g;
     }
     //Determina si la mano del jugador tiene blackjack
-    public boolean determinarBlackjack(Mano m)
+    public boolean determinarBlackjack(ArrayList<Carta> manoActual)
     {
 
-        if(contarPuntos(m) == 21 && m.getMano().size() == 2)
+        if(contarPuntos(manoActual) == 21 && manoActual.size() == 2)
             return true;
         else
             return false;
 
     }
-    public int convertirValores(Mano mano){
-        int cont = 0;
-        for (Carta item : mano.getMano()){
-            if(item.getValorNum()==1 || item.getValorNum() == 11){
-                cont++;
-                item.setValorNum(11);
-            }
 
-        }
-        return  cont;
+    //baraja las cartas
+    private void barajarse(){
+        Collections.shuffle(baraja.getBaraja());
     }
 
-    public void determinarValorAs(Mano mano,int cont){
-
-        int puntos = contarPuntos(mano);
-
-        if(puntos>21){
-            cont--;
-            for (Carta item : mano.getMano()){
-                if(item.getValorNum()==11){
-                    item.setValorNum(1);
-                    break;
-                }
-
-            }
-            if(cont > 0)
-                determinarValorAs(mano,cont);
-        }
-
-    }
 
 }
